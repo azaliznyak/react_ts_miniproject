@@ -5,7 +5,8 @@ import {MovieListCard} from "./MovieListCard";
 
 const MoviesList = () => {
     const dispatch=useAppDispatch();
-    const {movies}=useAppSelector(state => state.movies)
+    const {movies}=useAppSelector(state => state.movies);
+
 
     useEffect(()=>{
         dispatch(moviesActions.getAll())
