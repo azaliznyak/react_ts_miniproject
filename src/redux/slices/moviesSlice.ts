@@ -17,11 +17,11 @@ movies:[],
     total_results:null
 }
 
-const getAll=createAsyncThunk<IPagination<IMovie>, {page:IPagination<any>}>(
+const getAll=createAsyncThunk<IPagination<IMovie>, {page:number}>(
     'moviesSlice/getAll',
-    async (_,{rejectWithValue})=>{
+    async ({page},{rejectWithValue})=>{
         try {
-            const {data}=await movieService.getAll()
+            const {data}=await movieService.getAll(page)
             return data
         }catch (e) {
             const err=e as AxiosError
@@ -37,6 +37,9 @@ const moviesSlice=createSlice({
         builder
             .addCase(getAll.fulfilled, (state, action) => {
                 state.movies=action.payload.results
+                state.page=action.payload.page
+                state.total_pages=action.payload.total_pages
+                state.total_results=action.payload.total_results
             })
 })
 
