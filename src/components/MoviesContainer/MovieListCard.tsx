@@ -4,19 +4,19 @@ import {IMovie} from "../../interfaces";
 import css from './Movie.module.css'
 
 interface IProps extends PropsWithChildren {
-movie:IMovie
+    movie: IMovie
 }
 
-const MovieListCard : FC<IProps> = ({movie}) => {
+const MovieListCard: FC<IProps> = ({movie}) => {
 
- const {id, title}=movie
- return (
-  <div>
-   <div>id:{id}</div>
-   <div>title:{title}</div>
+    const {id, title, poster_path} = movie
+    const baseImageUrl=''
+    return (
+        <div className={css.Movie}>
+            <div className={css.MovieTitle}>title:{title}</div>
 
-  </div>
- );
+        </div>
+    );
 };
 
 export {MovieListCard};

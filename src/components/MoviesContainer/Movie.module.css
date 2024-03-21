@@ -1,0 +1,51 @@
+.Movie{
+    margin: 20px;
+    position: relative;
+}
+
+
+
+@keyframes zoom {
+    from{
+        transform: scale(1);
+    }
+    to{
+        transform: scale(1.1);
+    }
+}
+
+
+.MovieImg{
+    width: 190px;
+    height: 250px;
+    position: relative;
+    border-radius: 5px;
+
+
+
+}
+
+.MovieImg:hover{
+    transition: background-color 0.3s ease;
+    animation: zoom 0.5s forwards;
+    cursor: pointer;
+}
+
+
+
+
+
+.MovieTitle{
+    font-weight: bold;
+    font-size: 11px;
+    justify-content: center;
+    display: flex;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0, 0, 0 ,0.22);
+}
+
+
+
+
+
+
+

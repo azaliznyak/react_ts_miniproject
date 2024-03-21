@@ -17,7 +17,15 @@ const MoviesList = () => {
     },[page])
     return (
         <div>
+            <div className={css.MoviesList}>
+                <div className={css.MovieRow}>
             {movies.map(movie=><MovieListCard key={movie.id} movie={movie}/>)}
+                </div>
+            </div>
+
+            <div className={css.MoviesButton}>
+
+            </div>
 
         </div>
     );
