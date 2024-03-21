@@ -1,0 +1,79 @@
+
+
+.MoviesList {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.MovieRow {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.MoviesButton{
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+    padding: 10px;
+}
+.MoviesButton div{
+    padding: 10px;
+}
+
+@keyframes zoom {
+    from{
+        transform: scale(1);
+    }
+    to{
+        transform: scale(1.1);
+    }
+}
+
+.MoviesButton button{
+    background-color:cornflowerblue;
+    width: 40px;
+    border-radius: 20px;
+    border: 1px solid beige;
+    font-weight: bold;
+    color: black;
+
+}
+
+.MoviesButton button:hover{
+    transition: background-color 0.3s ease;
+    animation: zoom 0.5s forwards;
+    cursor: pointer;
+}
+
+.MovieResultsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.SearchPage{
+    height: 1700px
+}
+
+.form{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.input{
+    background-color: lightskyblue;
+    border-radius: 5px;
+    border: 1px solid beige;
+}
+
+.button{
+    background-color: #618ec8;
+    border-radius: 5px;
+    border: 1px solid beige;
+    font-weight: bold;
+}

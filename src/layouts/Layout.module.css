@@ -1,0 +1,11 @@
+.light{
+    background: #005AA7;
+    background: -webkit-linear-gradient(to right, #FFFDE4, #005AA7);
+    background: linear-gradient(to right, #FFFDE4, #005AA7);
+}
+
+.dark{
+    background: #000046;
+    background: -webkit-linear-gradient(to right, #1CB5E0, #000046);
+    background: linear-gradient(to right, #1CB5E0, #000046);
+}

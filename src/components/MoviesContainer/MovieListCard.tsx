@@ -1,6 +1,8 @@
 import {FC, PropsWithChildren} from "react";
 import {IMovie} from "../../interfaces";
 
+import css from './Movie.module.css'
+
 interface IProps extends PropsWithChildren {
 movie:IMovie
 }

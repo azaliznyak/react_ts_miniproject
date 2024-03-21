@@ -11,7 +11,7 @@ interface ThemeProviderProps {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export const useTheme = (): ThemeContextType => {
+const useTheme = (): ThemeContextType => {
     const context = useContext(ThemeContext);
     if (!context) {
         throw new Error('useTheme must be used within a ThemeProvider');
@@ -32,3 +32,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
     </ThemeContext.Provider>
 );
 };
+
+export {
+    useTheme
+}

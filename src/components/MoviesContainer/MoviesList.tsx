@@ -3,6 +3,8 @@ import {useAppDispatch, useAppSelector, usePageQuery} from "../../hooks";
 import {moviesActions} from "../../redux";
 import {MovieListCard} from "./MovieListCard";
 
+import css from './MoviesList.module.css'
+
 
 const MoviesList = () => {
     const dispatch=useAppDispatch();
