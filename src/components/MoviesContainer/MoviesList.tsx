@@ -8,13 +8,13 @@ import css from './MoviesList.module.css'
 
 const MoviesList = () => {
     const dispatch=useAppDispatch();
-    const {movies}=useAppSelector(state => state.movies);
+    const {movies, total_pages}=useAppSelector(state => state.movies);
     const {page, nextPage, prevPage}=usePageQuery()
 
 
     useEffect(()=>{
         dispatch(moviesActions.getAll({page}))
-    },[page])
+    },[page, dispatch])
     return (
         <div>
             <div className={css.MoviesList}>
@@ -24,6 +24,9 @@ const MoviesList = () => {
             </div>
 
             <div className={css.MoviesButton}>
+                <button disabled={page==='1'} onClick={prevPage}>prev</button>
+                <div>{page}</div>
+                <button disabled={page===`${total_pages}`} onClick={nextPage}>next</button>
 
             </div>
 
