@@ -8,14 +8,20 @@ interface IState {
     movies:IMovie[],
     page:string,
     total_pages:number,
-    total_results:number
+    total_results:number,
+    info:IMovie[];
+    vote_average:IMovie;
+    movieForUpdate:IMovie
     
 }
 const initialState:IState={
 movies:[],
     page:null,
     total_pages:null,
-    total_results:null
+    total_results:null,
+    info:null,
+    vote_average:null,
+    movieForUpdate:null
 }
 
 const getAll=createAsyncThunk<IPagination<IMovie>, {page:any}>(
@@ -30,10 +36,26 @@ const getAll=createAsyncThunk<IPagination<IMovie>, {page:any}>(
         }
     }
 )
+
+const getInfo= createAsyncThunk<void, {id:number}>(
+    'moviesSlice/getInfo',
+    async ({id}, {rejectWithValue})=>{
+        try {
+            await movieService.getByIdInfo(id)
+        }catch (e) {
+            const err=e as AxiosError
+            return rejectWithValue(err.response.data)
+        }
+    }
+)
 const moviesSlice=createSlice({
     name:'moviesSlice',
     initialState,
-    reducers:{},
+    reducers:{
+        setMovieForUpdate:(state, action)=>{
+            state.movieForUpdate=action.payload
+        }
+    },
     extraReducers:builder =>
         builder
             .addCase(getAll.fulfilled, (state, action) => {
@@ -48,7 +70,8 @@ const {reducer:moviesReducer, actions}=moviesSlice
 
 const moviesActions={
     ...actions,
-    getAll
+    getAll,
+    getInfo
 }
 
 export {

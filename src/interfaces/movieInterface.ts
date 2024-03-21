@@ -5,5 +5,6 @@ export interface IMovie {
     overview: string;
     release_date: string;
     vote_average: number;
+    backdrop_path: string;
     genre_ids: number[];
 }
