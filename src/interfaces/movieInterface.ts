@@ -7,4 +7,9 @@ export interface IMovie {
     vote_average: number;
     backdrop_path: string;
     genre_ids: number[];
+    results?: any[];
+}
+
+export interface Video {
+    key:string
 }

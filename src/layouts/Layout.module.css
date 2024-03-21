@@ -1,3 +1,15 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5; /* Фоновий колір за замовчуванням */
+    min-height: 100vh; /* Встановлення мінімальної висоти на весь екран */
+}
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Встановлення мінімальної висоти на весь екран */
+}
+
 .light{
     background: #005AA7;
     background: -webkit-linear-gradient(to right, #FFFDE4, #005AA7);

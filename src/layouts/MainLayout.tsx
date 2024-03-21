@@ -8,7 +8,8 @@ import css from './Layout.module.css'
 const MainLayout = () => {
     const { isDarkMode } = useTheme();
     return (
-        <div className={isDarkMode ? `${css.dark}` : `${css.light}`}>
+        <div className={`${css.layout} ${isDarkMode ? css.dark : css.light}`}>
+
             <Header />
             <Outlet />
 

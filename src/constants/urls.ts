@@ -8,7 +8,7 @@ const search='/search/movie'
 const urls={
     movies:{
         base:movies,
-        byId:(id:number):string=>`${movies}/${id}`,
+        movieById:(id:number):string=>`/movie/${id}/videos`,
         moviesByGenre:(genreId:number):string=>`${movies}?with_genres=${genreId}&`
     },
     movieInfo:{

@@ -1,0 +1,37 @@
+
+.MovieInfo{
+
+}
+
+.Title{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    color: #282c34;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.wrap{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+
+}
+
+.wrap img{
+    width: 380px;
+    height: 580px;
+    margin: 10px;
+    padding-left: 250px;
+    border-radius: 10px
+}
+
+.wrap2{
+    padding-top: 50px;
+    padding-right: 250px;
+    margin: 10px;
+    flex-wrap: wrap;
+    color: #282c34;
+
+}

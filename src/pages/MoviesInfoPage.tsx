@@ -12,16 +12,17 @@ const MoviesInfoPage = () => {
 // const {info, movieForUpdate}=useAppSelector(state => state.movies)
     const [info, setInfo] = useState<IMovie | null>(null);
 
-
-
 const dispatch=useAppDispatch()
+
+
 
 useEffect(()=>{
     const fetchMovieInfo = async () => {
         try {
             const response = await dispatch(moviesActions.getInfo({ id:+id }));
-            // Assuming the response is the movie object
-            setInfo(response.payload); // Update info state with the movie data
+
+            setInfo(response.payload as IMovie)
+            console.log(response);
         } catch (error) {
             console.error('Error fetching movie info:', error);
         }
@@ -29,7 +30,7 @@ useEffect(()=>{
 
     fetchMovieInfo();
 },[dispatch, id])
-    useParams()
+
     return (
         <div>
             {info && <MovieInfo info={info}/>}
