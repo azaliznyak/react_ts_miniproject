@@ -58,34 +58,35 @@ const getInfo= createAsyncThunk<IMovie, {id:number}>(
     }
 )
 
-// const getMoviesByGenre=createAsyncThunk<IPagination<IMovie>, {genreId:number, page:any}>(
-//     'moviesSlice/getMoviesByGenre',
-//     async ({genreId,page}, {rejectWithValue})=>{
-//         try {
-//             const {data}=await movieService.getByGenre(genreId,page)
-//             return data
-//         }catch (e) {
-//             const err=e as AxiosError
-//             return rejectWithValue(err.response.data)
-//         }
-//     }
-// )
-const getMoviesByGenre = createAsyncThunk(
-    'movies/getByGenre',
-    async ({ genreId, page }: { genreId: number; page: any }) => {
+const getMoviesByGenre=createAsyncThunk<IPagination<IMovie>, {genreId:number, page:any}>(
+    'moviesSlice/getMoviesByGenre',
+    async ({genreId,page}, {rejectWithValue})=>{
         try {
-            const response = await movieService.getByGenre(genreId, { params: { page } })
-            if (!response) {
-                throw new Error('Failed to fetch movies by genre');
-            }
-            const data = await response.data;
-            return data;
-        } catch (error) {
-            console.error('Error fetching movies by genre:', error);
-            throw error;
+            const response =await movieService.getByGenre(genreId,page)
+            return response
+
+        }catch (e) {
+            const err=e as AxiosError
+            return rejectWithValue(err.response.data)
         }
     }
-);
+)
+// const getMoviesByGenre = createAsyncThunk(
+//     'movies/getByGenre',
+//     async ({ genreId, page }: { genreId: number; page: any }) => {
+//         try {
+//             const response = await movieService.getByGenre(genreId, { params: { page } })
+//             if (!response) {
+//                 throw new Error('Failed to fetch movies by genre');
+//             }
+//             const data = await response.data;
+//             return data;
+//         } catch (error) {
+//             console.error('Error fetching movies by genre:', error);
+//             throw error;
+//         }
+//     }
+// );
 
 
 const getMovieVideo = createAsyncThunk<string[], { id: number }>(
@@ -146,7 +147,7 @@ const moviesSlice=createSlice({
 
             })
             .addCase(getMoviesByGenre.fulfilled, (state, action) => {
-               state.movies=action.payload.results
+              state.movies=action.payload.results
 
 
             })

@@ -9,37 +9,46 @@ import {IMovie, IPagination} from "../interfaces";
 import {IRes} from "../types";
 import {PayloadAction} from "@reduxjs/toolkit";
 
+import css from "../components/MoviesContainer/MoviesList.module.css";
+
 const MoviesByGenresPage = () => {
     // const [ movies,setMovies] = useState<IMovie[]>([]);
     // const [totalPages, setTotalPages] = useState(0);
     const { id } = useParams();
     const { page, nextPage, prevPage } = usePageQuery();
     const dispatch=useAppDispatch();
-    const {movies, moviesByGenre}=useAppSelector(state => state.movies)
+    const {movies, total_pages}=useAppSelector(state => state.movies)
 
-
-    const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
 
     useEffect(() => {
-        const response=dispatch(moviesActions.getMoviesByGenre({genreId:+id,page}))
-        console.log(response)
-    }, [id]);
+        const fetchData = async () => {
+            const moviesData = await dispatch(moviesActions.getMoviesByGenre({genreId:+id,page}));
+            console.log(moviesData)
 
-    const handleGenreChange = (genreId: number) => {
-        if (selectedGenres.includes(genreId)) {
-            setSelectedGenres(selectedGenres.filter(id => id !== genreId));
-        } else {
-            setSelectedGenres([...selectedGenres, genreId]);
-        }
-    };
+            // if (moviesData) {
+            //     dispatch(moviesActions.setMoviesByGenre(moviesData.results);
+            // }
 
+        };
+        fetchData();
+    }, [id, page]);
 
 
 
     return (
         <div>
 
-            {moviesByGenre.map(movie=><MoviesByGenre key={movie.id} movie={movie}/>)}
+            <div className={css.MoviesList}>
+                <div className={css.MovieRow}>
+                    {movies.map(movie => <MoviesByGenre key={movie.id} movie={movie} />)}
+
+                </div>
+            </div>
+            <div className={css.MoviesButton}>
+                <button disabled={page === '1'} onClick={prevPage}>prev</button>
+                <div>{page}</div>
+                <button disabled={page === `${total_pages}` || movies.length===0} onClick={nextPage}>next</button>
+            </div>
             
         </div>
     );

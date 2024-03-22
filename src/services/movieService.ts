@@ -10,7 +10,7 @@ const movieService={
     getAll:(page:number):IRes<IPagination<IMovie>> =>apiService.get(urls.movies.base, {params:{page}} ) , //{params:{page}}
     getById:(id:number):IRes<IMovie> =>apiService.get(urls.movies.movieById(id)),
     getByIdInfo:(id:number):IRes<IMovie> =>apiService.get(urls.movieInfo.byId(id)),
-    getByGenre: async (genreId:number, page:any):Promise<IRes<IPagination<IMovie>>> => {
+    getByGenre: async (genreId:number, page:any):Promise<IPagination<IMovie>> => {
         try {
             const response = await apiService.get(urls.movies.moviesByGenre(genreId), { params: { page } });
             if (!response) {
