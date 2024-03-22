@@ -1,4 +1,4 @@
-import {FC, PropsWithChildren, useEffect, useState} from "react";
+import React, {FC, PropsWithChildren, useEffect, useState} from "react";
 import {IMovie, Video} from "../../interfaces";
 
 import css from './MovieInfo.module.css'
@@ -8,6 +8,7 @@ import {useAppDispatch, useAppSelector} from "../../hooks";
 import axios from "axios";
 import {apiService} from "../../services";
 import {moviesActions} from "../../redux";
+
 
 interface IProps extends PropsWithChildren {
 info:IMovie,
@@ -20,6 +21,7 @@ const MovieInfo : FC<IProps> = ({info}) => {
 
     // const [videoKey, setVideoKey] = useState<string | null>(null);
     const [videoKey, setVideoKey] = useState<Video[]>([]);
+
 
 
 
@@ -80,6 +82,11 @@ const MovieInfo : FC<IProps> = ({info}) => {
 
 
 
+
+
+
+
+
  const baseImageUrl='https://image.tmdb.org/t/p/w500'
  return (
      <div className={css.MovieInfo}>
@@ -96,7 +103,7 @@ const MovieInfo : FC<IProps> = ({info}) => {
          {overview}
         </p>
 
-           {/* Video player */}
+            Video player
            {videoKey && (
                <iframe
                    width="560"
@@ -108,6 +115,8 @@ const MovieInfo : FC<IProps> = ({info}) => {
                    allowFullScreen
                ></iframe>
            )}
+
+
        </div>
       </div>
 

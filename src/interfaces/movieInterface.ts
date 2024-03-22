@@ -6,7 +6,7 @@ export interface IMovie {
     release_date: string;
     vote_average: number;
     backdrop_path: string;
-    genre_ids: number[];
+    genre_ids: [];
     results?: any[];
 }
 

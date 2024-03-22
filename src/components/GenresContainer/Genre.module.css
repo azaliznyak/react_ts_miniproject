@@ -1,0 +1,13 @@
+.Budge{
+    display: inline-flex;
+
+    /*justify-content: center;*/
+    padding: 30px;
+
+}
+
+.Genre{
+    display: inline-flex;
+    justify-content: center;
+    padding: 5px;
+}
