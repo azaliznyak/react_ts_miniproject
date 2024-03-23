@@ -71,7 +71,7 @@ const getMoviesByGenre=createAsyncThunk<IPagination<IMovie>, {genreId:number, pa
         }
     }
 )
-const getSearch=createAsyncThunk<IPagination<IMovie>, {query:any, page:number}>(
+const getSearch=createAsyncThunk<IPagination<IMovie>, {query:string, page:any}>(
     'moviesSlice/getSearch',
     async ({query,page}, {rejectWithValue})=>{
         try {

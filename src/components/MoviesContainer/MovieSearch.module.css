@@ -1,0 +1,50 @@
+
+
+.MoviesList {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /*padding-left: 53px;*/
+}
+
+.MovieRow {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1200px;
+
+}
+@keyframes zoom {
+    from{
+        transform: scale(1);
+    }
+    to{
+        transform: scale(1.1);
+    }
+}
+
+.MovieImg:hover{
+    transition: background-color 0.3s ease;
+    animation: zoom 0.5s forwards;
+    cursor: pointer;
+}
+
+.Movie {
+    margin: 20px;
+    position: relative;
+    flex-basis: 20%;
+    max-width: 200px;
+}
+
+.MovieImg {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.MovieTitle {
+    font-weight: bold;
+    font-size: 11px;
+    text-align: center;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}

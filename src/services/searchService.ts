@@ -3,7 +3,7 @@ import {urls} from "../constants";
 import {IMovie, IPagination} from "../interfaces";
 
 const searchService={
-    searchMovies: async (query:any, page = 1):Promise<IPagination<IMovie>> => {
+    searchMovies: async (query:string, page = '1'):Promise<IPagination<IMovie>> => {
         try {
             const response = await apiService.get(urls.search.base, { params: { query, page } });
             if (!response) {
