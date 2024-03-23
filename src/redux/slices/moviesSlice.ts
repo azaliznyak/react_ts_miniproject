@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IGenres, IMovie, IPagination, Video} from "../../interfaces";
 import {AxiosError} from "axios";
-import {movieService} from "../../services";
+import {movieService, searchService} from "../../services";
 import {string} from "joi";
 
 interface IState {
@@ -71,22 +71,18 @@ const getMoviesByGenre=createAsyncThunk<IPagination<IMovie>, {genreId:number, pa
         }
     }
 )
-// const getMoviesByGenre = createAsyncThunk(
-//     'movies/getByGenre',
-//     async ({ genreId, page }: { genreId: number; page: any }) => {
-//         try {
-//             const response = await movieService.getByGenre(genreId, { params: { page } })
-//             if (!response) {
-//                 throw new Error('Failed to fetch movies by genre');
-//             }
-//             const data = await response.data;
-//             return data;
-//         } catch (error) {
-//             console.error('Error fetching movies by genre:', error);
-//             throw error;
-//         }
-//     }
-// );
+const getSearch=createAsyncThunk<IPagination<IMovie>, {query:any, page:number}>(
+    'moviesSlice/getSearch',
+    async ({query,page}, {rejectWithValue})=>{
+        try {
+            const response=await searchService.searchMovies(query,page)
+            return response
+        }catch (e) {
+            const err=e as AxiosError
+            return rejectWithValue(err.response.data)
+        }
+    }
+)
 
 
 const getMovieVideo = createAsyncThunk<string[], { id: number }>(
@@ -151,6 +147,9 @@ const moviesSlice=createSlice({
 
 
             })
+            .addCase(getSearch.fulfilled, (state, action) => {
+                state.movies=action.payload.results
+            })
             // .addCase(getTotalPagesByGenre.fulfilled, (state, action) => {
             //     state.total_pages=action.payload.total_pages
             //     state.page=action.payload.page
@@ -171,6 +170,7 @@ const moviesActions={
     getInfo,
     getMoviesByGenre,
     getMovieVideo,
+    getSearch
 
 }
 

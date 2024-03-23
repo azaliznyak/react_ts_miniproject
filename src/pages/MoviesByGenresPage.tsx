@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector, usePageQuery} from "../hooks";
 import { useParams } from 'react-router-dom';
 import {useDispatch} from "react-redux";
 import {moviesActions} from "../redux";
-import {MoviesByGenre} from "../components/GenresContainer/MoviesByGenre";
+import {MoviesByGenre} from "../components";
 import {IMovie, IPagination} from "../interfaces";
 import {IRes} from "../types";
 import {PayloadAction} from "@reduxjs/toolkit";
