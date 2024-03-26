@@ -1,3 +1,5 @@
+import {IGenre} from "./genreInterface";
+
 export interface IMovie {
     id: number;
     title: string;
@@ -8,6 +10,7 @@ export interface IMovie {
     backdrop_path: string;
     genre_ids: [];
     results?: any[];
+    genres:IGenre[]
 }
 
 export interface Video {

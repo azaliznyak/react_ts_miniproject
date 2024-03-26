@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IGenres, IMovie, IPagination, Video} from "../../interfaces";
+import {IGenre, IGenres, IMovie, IPagination, Video} from "../../interfaces";
 import {AxiosError} from "axios";
 import {movieService, searchService} from "../../services";
 import {string} from "joi";
@@ -9,13 +9,14 @@ interface IState {
     page:string,
     total_pages:number,
     total_results:number,
-    info:IMovie[];
+    info:IMovie;
     vote_average:IMovie;
     movieForUpdate:IMovie;
-    genre_ids:IMovie[];
+    genre_ids:[];
     videos:Video[]
     [key:string]:IState[keyof IState];
     moviesByGenre: IMovie[];
+    genres:IGenre[]
     
 }
 const initialState:IState={
@@ -29,6 +30,7 @@ movies:[],
     genre_ids:[],
     videos:[],
     moviesByGenre: [],
+    genres:[]
 
 }
 
@@ -124,6 +126,7 @@ const moviesSlice=createSlice({
             state.page = action.payload.page;
             state.total_pages = action.payload.total_pages;
             state.total_results = action.payload.total_results;
+            state.genre_ids=action.payload
         },
         getMoviesByGenreSuccess(state, action: PayloadAction<IMovie[]>) {
             state.moviesByGenre = action.payload;
@@ -150,6 +153,12 @@ const moviesSlice=createSlice({
             .addCase(getSearch.fulfilled, (state, action) => {
                 state.movies=action.payload.results
             })
+            .addCase(getInfo.fulfilled, (state, action) => {
+                // state.info=action.payload.results
+                state.genre_ids=action.payload.genre_ids
+                state.genres=action.payload.genres
+            })
+
             // .addCase(getTotalPagesByGenre.fulfilled, (state, action) => {
             //     state.total_pages=action.payload.total_pages
             //     state.page=action.payload.page

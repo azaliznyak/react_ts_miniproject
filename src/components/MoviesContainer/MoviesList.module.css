@@ -63,12 +63,15 @@
     display: flex;
     justify-content: center;
     padding: 10px;
+
 }
 
 .input{
     background-color: lightskyblue;
     border-radius: 5px;
     border: 1px solid beige;
+    padding-right: 2px;
+
 }
 
 .button{

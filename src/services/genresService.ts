@@ -5,7 +5,7 @@ import {IGenre, IGenres} from "../interfaces";
 
 const genreService={
     getAll:():IRes<IGenres<IGenre>> =>apiService.get(urls.genres.base),
-    getById:(id:number):IRes<IGenre>=>apiService.get(urls.genres.byId(id))
+    getById:(ids:number):IRes<IGenre>=>apiService.get(urls.genres.byId(ids))
 }
 
 export {

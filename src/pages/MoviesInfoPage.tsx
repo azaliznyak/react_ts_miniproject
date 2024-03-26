@@ -33,7 +33,7 @@ useEffect(()=>{
 
     return (
         <div>
-            {info && <MovieInfo info={info}/>}
+            {info && <MovieInfo info={info} />}
             
         </div>
     );

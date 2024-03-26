@@ -14,13 +14,13 @@ const SearchPage = () => {
     const page=query1.get('page')
     const [currentPage, setCurrentPage] = useState(1);
 
-
         const handleSearch = async () => {
             const data = await dispatch(moviesActions.getSearch({query,page:+page}));
             console.log(data)
 
 
         };
+  
         const handleInputChange = (event:any) => {
             setQuery(event.target.value);
             reset()
