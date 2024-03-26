@@ -79,4 +79,35 @@
     border-radius: 5px;
     border: 1px solid beige;
     font-weight: bold;
+    height: 20px;
+    width: 50px;
+}
+
+
+/* Додайте стилі для накладання зверху */
+.autosuggestContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+/* Додайте стилі для напівпрозорості */
+.autosuggestContainer .suggestions-container {
+    background-color: rgba(255, 255, 255, 0.9); /* Напівпрозорий фон */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+/* Стилі для окремих підказок */
+.autosuggestContainer .suggestions-container .suggestion {
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+/* Стилі для активної підказки */
+.autosuggestContainer .suggestions-container .suggestion.active {
+    background-color: #007bff;
+    color: #fff;
 }
