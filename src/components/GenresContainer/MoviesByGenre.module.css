@@ -1,52 +1,50 @@
-.Movie{
+.Movie {
     margin: 20px;
     position: relative;
+    flex-basis: 20%;
+    max-width: 200px;
 }
 
 
 @keyframes zoom {
-    from{
+    from {
         transform: scale(1);
     }
-    to{
+    to {
         transform: scale(1.1);
     }
 }
 
 
-.MovieImg{
-    width: 190px;
-    height: 250px;
-    position: relative;
+.MovieImg {
+    /*width: 190px;*/
+    /*height: 250px;*/
+    /*position: relative;*/
+    /*border-radius: 5px;*/
+    width: 100%;
+    height: auto;
     border-radius: 5px;
-
 
 
 }
 
-.MovieImg:hover{
+.MovieImg:hover {
     transition: background-color 0.3s ease;
     animation: zoom 0.5s forwards;
     cursor: pointer;
 }
 
 
-
-
-
-.MovieTitle{
+.MovieTitle {
     font-weight: bold;
     font-size: 11px;
     justify-content: center;
     display: flex;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0, 0, 0 ,0.22);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
-/* Movie.module.css */
 
 
-
-
-.Stars{
+.Stars {
 
 }

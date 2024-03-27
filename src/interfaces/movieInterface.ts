@@ -10,9 +10,9 @@ export interface IMovie {
     backdrop_path: string;
     genre_ids: [];
     results?: any[];
-    genres:IGenre[]
+    genres: IGenre[]
 }
 
 export interface Video {
-    key:string
+    key: string
 }

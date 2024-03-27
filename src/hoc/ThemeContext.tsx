@@ -4,6 +4,7 @@ interface ThemeContextType {
     isDarkMode: boolean;
     toggleTheme: () => void;
 }
+
 interface ThemeProviderProps {
     children: ReactNode;
 }
@@ -19,14 +20,14 @@ const useTheme = (): ThemeContextType => {
     return context;
 };
 
-export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
+export const ThemeProvider: FC<ThemeProviderProps> = ({children}) => {
     const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
     const toggleTheme = () => {
         setIsDarkMode(prevMode => {
-           const newMode= !prevMode;
-           localStorage.setItem('theme', JSON.stringify(newMode));
-           return newMode
+            const newMode = !prevMode;
+            localStorage.setItem('theme', JSON.stringify(newMode));
+            return newMode
         });
     };
 
@@ -38,10 +39,10 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
     }, []);
 
     return (
-        <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
-    {children}
-    </ThemeContext.Provider>
-);
+        <ThemeContext.Provider value={{isDarkMode, toggleTheme}}>
+            {children}
+        </ThemeContext.Provider>
+    );
 };
 
 export {

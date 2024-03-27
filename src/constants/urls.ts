@@ -1,25 +1,25 @@
-const baseURL='https://api.themoviedb.org/3';
+const baseURL = 'https://api.themoviedb.org/3';
 
-const movies='/discover/movie';
-const genres='/genre/movie/list';
-const movieInfo='/movie';
-const search='/search/movie'
+const movies = '/discover/movie';
+const genres = '/genre/movie/list';
+const movieInfo = '/movie';
+const search = '/search/movie'
 
-const urls={
-    movies:{
-        base:movies,
-        movieById:(id:number):string=>`/movie/${id}/videos`,
-        moviesByGenre:(genreId:number):string=>`${movies}?with_genres=${genreId}&`
+const urls = {
+    movies: {
+        base: movies,
+        movieById: (id: number): string => `/movie/${id}/videos`,
+        moviesByGenre: (genreId: number): string => `${movies}?with_genres=${genreId}&`
     },
-    movieInfo:{
-        byId:(id:number):string=>`${movieInfo}/${id}`
+    movieInfo: {
+        byId: (id: number): string => `${movieInfo}/${id}`
     },
-    genres:{
+    genres: {
         base: genres,
-        byId:(id:number):string=>`${genres}/${id}`
+        byId: (id: number): string => `${genres}/${id}`
     },
-    search:{
-        base:search
+    search: {
+        base: search
     }
 }
 

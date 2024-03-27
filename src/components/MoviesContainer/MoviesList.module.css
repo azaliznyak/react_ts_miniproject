@@ -1,5 +1,4 @@
 
-
 .MoviesList {
     width: 100%;
     display: flex;
@@ -14,27 +13,28 @@
     max-width: 1200px;
 }
 
-.MoviesButton{
+.MoviesButton {
     display: flex;
     justify-content: center;
     margin: 30px;
     padding: 10px;
 }
-.MoviesButton div{
+
+.MoviesButton div {
     padding: 10px;
 }
 
 @keyframes zoom {
-    from{
+    from {
         transform: scale(1);
     }
-    to{
+    to {
         transform: scale(1.1);
     }
 }
 
-.MoviesButton button{
-    background-color:cornflowerblue;
+.MoviesButton button {
+    background-color: cornflowerblue;
     width: 40px;
     border-radius: 20px;
     border: 1px solid beige;
@@ -43,7 +43,7 @@
 
 }
 
-.MoviesButton button:hover{
+.MoviesButton button:hover {
     transition: background-color 0.3s ease;
     animation: zoom 0.5s forwards;
     cursor: pointer;
@@ -55,59 +55,32 @@
     justify-content: space-between;
 }
 
-.SearchPage{
+.SearchPage {
     height: 1700px
 }
 
-.form{
+.form {
     display: flex;
     justify-content: center;
     padding: 10px;
 
 }
 
-.input{
+.input {
     background-color: lightskyblue;
     border-radius: 5px;
     border: 1px solid beige;
-    padding-right: 2px;
+    /*padding-right: 2px;*/
 
 }
 
-.button{
+.button {
     background-color: #618ec8;
     border-radius: 5px;
     border: 1px solid beige;
     font-weight: bold;
     height: 20px;
-    width: 50px;
+    width: 57px;
+    margin-left: 5px;
 }
 
-
-/* Додайте стилі для накладання зверху */
-.autosuggestContainer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-}
-
-/* Додайте стилі для напівпрозорості */
-.autosuggestContainer .suggestions-container {
-    background-color: rgba(255, 255, 255, 0.9); /* Напівпрозорий фон */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 10px;
-}
-
-/* Стилі для окремих підказок */
-.autosuggestContainer .suggestions-container .suggestion {
-    cursor: pointer;
-    padding: 5px 10px;
-}
-
-/* Стилі для активної підказки */
-.autosuggestContainer .suggestions-container .suggestion.active {
-    background-color: #007bff;
-    color: #fff;
-}

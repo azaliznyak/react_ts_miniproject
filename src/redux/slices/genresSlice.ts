@@ -1,65 +1,65 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {IGenre, IGenres, IMovie} from "../../interfaces";
 import {AxiosError} from "axios";
+
+import {IGenre, IGenres, IMovie} from "../../interfaces";
 import {genreService} from "../../services";
 
 interface IState {
-    genresMovies:IGenre[];
-    genre_ids:IMovie[];
+    genresMovies: IGenre[];
+    genre_ids: IMovie[];
 }
-const initialState:IState={
-genresMovies:[],
-    genre_ids:[],
+
+const initialState: IState = {
+    genresMovies: [],
+    genre_ids: [],
 };
-const getAllGenres=createAsyncThunk<IGenres<IGenre>, void>(
+const getAllGenres = createAsyncThunk<IGenres<IGenre>, void>(
     'genresSlice/getAllGenres',
-    async (_,{rejectWithValue})=>{
+    async (_, {rejectWithValue}) => {
         try {
-            const {data}=await genreService.getAll()
+            const {data} = await genreService.getAll()
             return data
 
-        }catch (e) {
-            const err=e as AxiosError
+        } catch (e) {
+            const err = e as AxiosError
             return rejectWithValue(err.response.data)
         }
     }
 )
 
 
- const getGenresByIds=createAsyncThunk<IGenre, {id:number}>(
-     'genresSlice/getGenresByIds',
-         async ({id}, {rejectWithValue})=>{
-         try {
-             await genreService.getById(id)
+const getGenresByIds = createAsyncThunk<IGenre, { id: number }>(
+    'genresSlice/getGenresByIds',
+    async ({id}, {rejectWithValue}) => {
+        try {
+            await genreService.getById(id)
 
-         }catch (e) {
-             const err =e as AxiosError
-             return rejectWithValue(err.response.data)
-         }
-         }
+        } catch (e) {
+            const err = e as AxiosError
+            return rejectWithValue(err.response.data)
+        }
+    }
 )
 
-const genresSlice=createSlice({
-    name:'genresSlice',
+const genresSlice = createSlice({
+    name: 'genresSlice',
     initialState,
-    reducers:{},
-    extraReducers:builder =>
+    reducers: {},
+    extraReducers: builder =>
         builder
-            .addCase(getAllGenres.fulfilled,(state, action) => {
+            .addCase(getAllGenres.fulfilled, (state, action) => {
 
-                state.genresMovies=action.payload.genres;
+                state.genresMovies = action.payload.genres;
 
-
-            })
-            .addCase(getGenresByIds.fulfilled, (state, action) => {
 
             })
+
 
 })
 
-const {reducer:genresReducer, actions}=genresSlice
+const {reducer: genresReducer, actions} = genresSlice
 
-const genresActions={
+const genresActions = {
     ...actions,
     getAllGenres,
     getGenresByIds

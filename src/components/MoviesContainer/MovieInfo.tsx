@@ -1,15 +1,12 @@
 import React, {FC, PropsWithChildren, useEffect, useState} from "react";
-import {IGenre, IGenres, IMovie, Video} from "../../interfaces";
-
-import css from './MovieInfo.module.css'
-import StarRatings from "react-star-ratings";
-import {StarsRating} from "../StarsRating";
-import {useAppDispatch, useAppSelector} from "../../hooks";
-import axios from "axios";
-import {apiService} from "../../services";
-import {genresActions, moviesActions} from "../../redux";
 import {useNavigate} from "react-router-dom";
 import {Badge} from "@mui/material";
+
+import {IGenre, IMovie} from "../../interfaces";
+import css from './MovieInfo.module.css'
+import {StarsRating} from "../StarsRating";
+import {useAppDispatch} from "../../hooks";
+import {genresActions} from "../../redux";
 
 
 interface IProps extends PropsWithChildren {
@@ -18,25 +15,21 @@ interface IProps extends PropsWithChildren {
 }
 
 const MovieInfo: FC<IProps> = ({info}) => {
-    const { id,title, poster_path, overview, release_date, vote_average, backdrop_path, genres} = info;
-    const {movies, genre_ids} = useAppSelector(state => state.movies)
-    const {genresMovies} = useAppSelector(state => state.genres)
+    const {title, poster_path, overview, release_date, vote_average, genres} = info;
     const dispatch = useAppDispatch()
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     console.log(info)
     console.log(genres)
 
 
-
-    // const [videoKey, setVideoKey] = useState<string | null>(null);
-    const [videoKey, setVideoKey] = useState<Video[]>([]);
+    // const [videoKey, setVideoKey] = useState<Video[]>([]);
 
     const [movieGenres, setMovieGenres] = useState<string[] | null>([]);
     useEffect(() => {
         const fetchGenres = async () => {
             try {
                 await dispatch(genresActions.getAllGenres());
-                 const genresName=genres.map(genre=>genre.name)
+                const genresName = genres.map(genre => genre.name)
 
                 setMovieGenres(genresName);
             } catch (error) {
@@ -46,15 +39,12 @@ const MovieInfo: FC<IProps> = ({info}) => {
 
 
         fetchGenres();
-    }, [dispatch]);
+    }, [dispatch,genres]);
 
 
     const handleGenreClick = (genre: IGenre) => {
         navigate(`/genres/${genre.id}`);
     };
-
-
-
 
 
     // useEffect(()=>{
@@ -98,33 +88,29 @@ const MovieInfo: FC<IProps> = ({info}) => {
                 <img src={`${baseImageUrl}${poster_path}`} alt={title}/>
                 <div className={css.wrap2}>
 
-                    <div>Rating - <StarsRating vote_average={vote_average}/></div>
-                    <div>Release date:{release_date}
+                    <div>Rating: <StarsRating vote_average={vote_average}/></div>
+                    <div>Release date: {release_date}
 
                     </div>
 
-
-                    {/*<p> Genres: {movieGenres.join(', ') }</p>*/}
-                    <p >Genres: {movieGenres.map((genre, index) => (
-                        <span key={index} className={css.Genre} onClick={() => handleGenreClick(genres[index])}><Badge badgeContent={genre} color={"primary"}></Badge></span>
+                    <p>Genres: {movieGenres.map((genre, index) => (
+                        <span key={index} className={css.Genre} onClick={() => handleGenreClick(genres[index])}><Badge
+                            badgeContent={genre} color={"primary"}></Badge></span>
                     ))}</p>
-                    <p>Overview:
-                        {overview}
+                    <p>Overview: {overview}</p>
 
-                    </p>
-
-                    Video player
-                    {videoKey && (
-                        <iframe
-                            width="560"
-                            height="315"
-                            src={`https://www.youtube.com/embed/${videoKey}`}
-                            title={title}
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                        ></iframe>
-                    )}
+                    {/*Video player*/}
+                    {/*/!*{videoKey && (*!/*/}
+                    {/*/!*    <iframe*!/*/}
+                    {/*/!*        width="560"*!/*/}
+                    {/*/!*        height="315"*!/*/}
+                    {/*/!*        src={`https://www.youtube.com/embed/${videoKey}`}*!/*/}
+                    {/*/!*        title={title}*!/*/}
+                    {/*/!*        frameBorder="0"*!/*/}
+                    {/*/!*        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"*!/*/}
+                    {/*/!*        allowFullScreen*!/*/}
+                    {/*/!*    ></iframe>*!/*/}
+                    {/*)}*/}
 
 
                 </div>

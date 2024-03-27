@@ -2,10 +2,10 @@ import {apiService} from "./apiService";
 import {urls} from "../constants";
 import {IMovie, IPagination} from "../interfaces";
 
-const searchService={
-    searchMovies: async (query:string, page = '1'):Promise<IPagination<IMovie>> => {
+const searchService = {
+    searchMovies: async (query: string, page = '1'): Promise<IPagination<IMovie>> => {
         try {
-            const response = await apiService.get(urls.search.base, { params: { query, page } });
+            const response = await apiService.get(urls.search.base, {params: {query, page}});
             if (!response) {
                 throw new Error('Failed to fetch movies');
             }

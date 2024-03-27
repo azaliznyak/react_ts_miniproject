@@ -1,9 +1,5 @@
 
-.MovieInfo{
-
-}
-
-.Title{
+.Title {
     display: flex;
     justify-content: center;
     padding: 20px;
@@ -14,7 +10,7 @@
 
 }
 
-.wrap{
+.wrap {
     display: flex;
     justify-content: center;
     margin: 20px;
@@ -22,17 +18,16 @@
 
 }
 
-.wrap img{
+.wrap img {
     width: 380px;
     height: 580px;
-box-shadow:   10px 10px 15px rgba(0,0,0,0.4);
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.4);
     margin-left: 250px;
-
     border-radius: 20px;
 
 }
 
-.wrap2{
+.wrap2 {
     padding-top: 50px;
     padding-right: 250px;
     margin-left: 50px;
@@ -42,12 +37,9 @@ box-shadow:   10px 10px 15px rgba(0,0,0,0.4);
 
 }
 
-.Genre{
+.Genre {
     display: inline-flex;
-
-    /*justify-content: center;*/
     padding: 25px;
     cursor: pointer;
-
- margin: 10px
+    margin: 10px
 }

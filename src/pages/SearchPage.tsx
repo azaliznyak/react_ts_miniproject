@@ -1,153 +1,110 @@
 import React, {useEffect, useState} from 'react';
-import {useForm} from 'react-hook-form';
-import css from "../components/MoviesContainer/MoviesList.module.css";
-import {useAppDispatch, useAppSelector, usePageQuery} from "../hooks";
-import {moviesActions} from "../redux";
+import {SubmitHandler, useForm} from 'react-hook-form';
 import {useSearchParams} from "react-router-dom";
-import {MovieSearch} from "../components";
-import Autosuggest from 'react-autosuggest';
-import {Autocomplete, TextField, Button} from "@mui/material";
 
+import css from "../components/MoviesContainer/MoviesList.module.css";
+import {useAppDispatch, useAppSelector} from "../hooks";
+import {moviesActions} from "../redux";
+import {MovieSearch} from "../components";
+import {IMovie} from "../interfaces";
 
 
 const SearchPage = () => {
-    const {reset} = useForm({mode: 'all'})
-    const dispatch=useAppDispatch()
-    const {movies }=useAppSelector(state => state.movies)
+    const {reset, handleSubmit} = useForm<IMovie>({mode: 'all'})
+    const dispatch = useAppDispatch()
+    const {movies, total_pages} = useAppSelector(state => state.movies)
     const [query, setQuery] = useState('');
-    const [query1, setQuery1] =useSearchParams({page:'1'});
-    const page=query1.get('page')
+    const [query1, setQuery1] = useSearchParams({page: '1'});
+    const page = query1.get('page')
     const [currentPage, setCurrentPage] = useState(1);
-    const [value, setValue] = useState<string>('');
-    const [suggestions, setSuggestions] = useState<string[]>([]);
+    // const [suggestions, setSuggestions] = useState<string[]>([]);
 
 
-
-    // const handleInputChange = (event: React.FormEvent<HTMLInputElement>, { newValue }: { newValue: string }) => {
-    //     setValue(newValue);
-    // };
-//-----------------------------------------------
-//     const handleSearch = async () => {
-//             const data = await dispatch(moviesActions.getSearch({query,page:+page}));
-//             console.log(data)
-
-        //
-        // };
-        //
-        // const handleInputChange = (event:any) => {
-        //     setQuery(event.target.value);
-        //
-        //     reset()
-        // };
-        //
-        //
-        // const handleNextPage = async () => {
-        //     setCurrentPage(currentPage + 1);
-        //     await setQuery1({ page: (currentPage + 1).toString() })
-        //     await handleSearch();
-        // };
-        //
-        // const handlePrevPage = async () => {
-        //     if (currentPage > 1) {
-        //         setCurrentPage(currentPage - 1);
-        //         await setQuery1({ page: (currentPage - 1).toString() });
-        //         await handleSearch();
-        //     }
-        // };
-
-//------------------------------------
     useEffect(() => {
-        // Ваша функція, яка отримує підказки для введеного запиту
         const fetchSuggestions = async () => {
-            const response = await dispatch(moviesActions.getSearch({ query, page }));
+            const response = await dispatch(moviesActions.getSearch({query, page}));
             if (!response) {
                 throw new Error('Failed to fetch suggestions');
             }
-            const data:any = response.payload // Припускаючи, що відповідь містить список підказок
-
-            setSuggestions(data.results);
+            // const data: any = response.payload
+            //
+            // setSuggestions(data.results);
         };
 
         fetchSuggestions();
-    }, [query]);
+    }, [query, dispatch, page]);
 
-    // const handleSuggestionSelected = (event:React.FormEvent<HTMLInputElement>, { suggestion }: { suggestion: any }) => {
-    //     // setQuery(suggestion.title); // При виборі підказки встановлюємо значення запиту
-    // };
-    const handleSuggestionSelected = (event: any, newValue: any) => {
-        if (newValue && newValue.title) {
-            setQuery(newValue.title);
-        }
-    };
-    const getSuggestionValue = (suggestion:any) => suggestion.title;
 
-    const renderSuggestion = (suggestion:any) => <div>{suggestion.title}</div>;
-
-//----------------------------------
-    const handleSearch = async () => {
-        const data = await dispatch(moviesActions.getSearch({query,page:+page}));
-        console.log(data)
+    const handleSearch: SubmitHandler<IMovie> = async () => {
+        await dispatch(moviesActions.getSearch({query, page: +page}));
 
 
     };
 //
 //
-    const handleInputChange = (event:any) => {
+    const handleInputChange = (event: any) => {
         setQuery(event.target.value);
         reset()
     };
 
     const handleNextPage = async () => {
         setCurrentPage(currentPage + 1);
-        await setQuery1({ page: (currentPage + 1).toString() })
-        await handleSearch();
+        await setQuery1({page: (currentPage + 1).toString()})
+        await handleSearch(null);
     };
 
     const handlePrevPage = async () => {
         if (currentPage > 1) {
             setCurrentPage(currentPage - 1);
-            await setQuery1({ page: (currentPage - 1).toString() });
-            await handleSearch();
+            await setQuery1({page: (currentPage - 1).toString()});
+            await handleSearch(null);
         }
     };
+    // const moviesArr=movies.map((movie, index) => `${movie.title}-${index}`)
 
 
     return (
-            <div className={css.SearchPage}>
-                <div className={css.form}>
-                    <Autocomplete
-                        options={movies.map(movie=>movie.title)}
-                        getOptionLabel={option=>option}
-                        renderInput={(params) => (
-                            <TextField
-                                {...params}
-                                label="Search film"
-                                variant="outlined"
-                                InputProps={{
-                                    ...params.InputProps,
-                                    placeholder: 'Search film',
-                                    value: query,
-                                    onChange: handleInputChange,
-                                }}
-                            />
-                        )}
-                        onChange={handleSuggestionSelected}
-                    />
-                    <Button variant="contained" onClick={handleSearch}>Save</Button>
-                     {/*<button className={css.button} onClick={handleSearch}>Search</button>*/}
+        <div className={css.SearchPage}>
+            <form onSubmit={handleSubmit(handleSearch)} className={css.form}>
+                <input className={css.input} type="text" placeholder={'Search film'} value={query}
+                       onChange={handleInputChange}/>
+                {/*<Autocomplete*/}
+                {/*    options={moviesArr}*/}
+                {/*    getOptionLabel={option=>option}*/}
+                {/*    renderInput={(params) => (*/}
+                {/*        <TextField*/}
+                {/*            {...params}*/}
+                {/*            label="Search film"*/}
+                {/*            variant="outlined"*/}
+                {/*            InputProps={{*/}
+                {/*                ...params.InputProps,*/}
+                {/*                placeholder: 'Search film',*/}
+                {/*                value: query,*/}
+                {/*                onChange: handleInputChange,*/}
+                {/*            }}*/}
+                {/*        />*/}
 
-                </div>
-                <MovieSearch/>
-                <div className={css.MoviesButton}>
-                    <button onClick={handlePrevPage}>Prev</button>
-                    <div>{page}</div>
-                    <button onClick={handleNextPage}>Next</button>
+                {/*    )}*/}
+                {/*    // onChange={handleSuggestionSelected}*/}
+                {/*    // onChange={(event, newValue) => {*/}
+                {/*    //     if (newValue && newValue.key !== undefined) {*/}
+                {/*    //         handleSuggestionSelected(event, newValue.key);*/}
+                {/*    //     }*/}
+                {/*    // }}*/}
+                {/*/>*/}
+                {/*<Button variant="contained">Search</Button>*/}
+                <button className={css.button}>Search</button>
 
-                </div>
+            </form>
+            <MovieSearch/>
+            <div className={css.MoviesButton}>
+                <button onClick={handlePrevPage}>Prev</button>
+                <div>{page}</div>
+                <button disabled={page === `${total_pages}` || movies.length === 0} onClick={handleNextPage}>Next
+                </button>
+
             </div>
-
-
-
+        </div>
 
 
     );

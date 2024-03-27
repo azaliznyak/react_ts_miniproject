@@ -1,10 +1,11 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
-import { useTheme } from '../../hoc';
+
+import {useTheme} from '../../hoc';
 import css from './Header.module.css'
 
 const Header = () => {
-    const { isDarkMode, toggleTheme } = useTheme();
+    const {isDarkMode, toggleTheme} = useTheme();
 
     return (
         <div>
